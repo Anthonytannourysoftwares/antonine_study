@@ -1,0 +1,93 @@
+{
+  "faculties": [
+    {
+      "id": "fea",
+      "name": "Faculty of Engineering",
+      "majors": [
+        { "id": "cs", "name": "Computer Science" },
+        { "id": "ce", "name": "Computer Engineering" },
+        { "id": "te", "name": "Telecom Engineering" }
+      ]
+    },
+    {
+      "id": "fbm",
+      "name": "Faculty of Business & Management",
+      "majors": [
+        { "id": "ba", "name": "Business Administration" },
+        { "id": "fin", "name": "Finance" }
+      ]
+    }
+  ],
+  "subjects": {
+    "cs": {
+      "1": {
+        "1": [
+          { "id": "cs101", "code": "CS101", "name": "Intro to Programming", "credits": 3, "topics": ["Variables & Types", "Control Flow", "Functions", "Arrays", "OOP Basics"] },
+          { "id": "math101", "code": "MATH101", "name": "Calculus I", "credits": 3, "topics": ["Limits", "Derivatives", "Integrals", "Applications of Derivatives", "Series"] },
+          { "id": "phys101", "code": "PHYS101", "name": "Physics I", "credits": 3, "topics": ["Kinematics", "Newton's Laws", "Work & Energy", "Momentum", "Rotational Motion"] },
+          { "id": "eng101", "code": "ENG101", "name": "English Communication", "credits": 3, "topics": ["Academic Writing", "Presentations", "Critical Reading", "Research Methods", "Argumentation"] },
+          { "id": "math102", "code": "MATH102", "name": "Discrete Mathematics", "credits": 3, "topics": ["Logic & Proofs", "Sets & Relations", "Combinatorics", "Graph Theory", "Boolean Algebra"] }
+        ],
+        "2": [
+          { "id": "cs102", "code": "CS102", "name": "Data Structures", "credits": 3, "topics": ["Linked Lists", "Stacks & Queues", "Trees", "Graphs", "Hash Tables", "Sorting Algorithms"] },
+          { "id": "math201", "code": "MATH201", "name": "Calculus II", "credits": 3, "topics": ["Multivariable Functions", "Partial Derivatives", "Double Integrals", "Vector Calculus", "Differential Equations"] },
+          { "id": "cs103", "code": "CS103", "name": "Digital Logic", "credits": 3, "topics": ["Number Systems", "Boolean Algebra", "Combinational Circuits", "Sequential Circuits", "Memory"] }
+        ]
+      },
+      "2": {
+        "1": [
+          { "id": "cs201", "code": "CS201", "name": "Algorithms", "credits": 3, "topics": ["Complexity Analysis", "Divide & Conquer", "Dynamic Programming", "Greedy Algorithms", "Graph Algorithms"] },
+          { "id": "cs202", "code": "CS202", "name": "Database Systems", "credits": 3, "topics": ["ER Modeling", "SQL", "Normalization", "Transactions", "Indexing"] },
+          { "id": "cs203", "code": "CS203", "name": "Computer Architecture", "credits": 3, "topics": ["ISA", "Pipelining", "Cache", "Virtual Memory", "I/O Systems"] }
+        ],
+        "2": [
+          { "id": "cs204", "code": "CS204", "name": "Operating Systems", "credits": 3, "topics": ["Processes", "Threads", "Scheduling", "Memory Management", "File Systems"] },
+          { "id": "cs205", "code": "CS205", "name": "Software Engineering", "credits": 3, "topics": ["Requirements", "Design Patterns", "Testing", "Agile", "Version Control"] },
+          { "id": "cs206", "code": "CS206", "name": "Web Development", "credits": 3, "topics": ["HTML/CSS", "JavaScript", "REST APIs", "Databases", "Deployment"] }
+        ]
+      }
+    },
+    "ce": {
+      "1": {
+        "1": [
+          { "id": "ce101", "code": "CE101", "name": "Intro to Engineering", "credits": 3, "topics": ["Engineering Disciplines", "Problem Solving", "Design Thinking", "Ethics", "Technical Communication"] },
+          { "id": "math101", "code": "MATH101", "name": "Calculus I", "credits": 3, "topics": ["Limits", "Derivatives", "Integrals", "Applications of Derivatives", "Series"] },
+          { "id": "phys101", "code": "PHYS101", "name": "Physics I", "credits": 3, "topics": ["Kinematics", "Newton's Laws", "Work & Energy", "Momentum", "Rotational Motion"] }
+        ],
+        "2": [
+          { "id": "ce102", "code": "CE102", "name": "Circuit Analysis", "credits": 3, "topics": ["Ohm's Law", "Kirchhoff's Laws", "Thevenin/Norton", "AC Analysis", "Frequency Response"] },
+          { "id": "cs101", "code": "CS101", "name": "Intro to Programming", "credits": 3, "topics": ["Variables & Types", "Control Flow", "Functions", "Arrays", "OOP Basics"] }
+        ]
+      }
+    },
+    "te": {
+      "1": {
+        "1": [
+          { "id": "te101", "code": "TE101", "name": "Signals & Systems", "credits": 3, "topics": ["Signal Types", "LTI Systems", "Fourier Transform", "Laplace Transform", "Z-Transform"] },
+          { "id": "math101", "code": "MATH101", "name": "Calculus I", "credits": 3, "topics": ["Limits", "Derivatives", "Integrals", "Applications of Derivatives", "Series"] }
+        ]
+      }
+    },
+    "ba": {
+      "1": {
+        "1": [
+          { "id": "ba101", "code": "BA101", "name": "Principles of Management", "credits": 3, "topics": ["Planning", "Organizing", "Leading", "Controlling", "Decision Making"] },
+          { "id": "ba102", "code": "BA102", "name": "Microeconomics", "credits": 3, "topics": ["Supply & Demand", "Elasticity", "Market Structures", "Consumer Theory", "Production Costs"] },
+          { "id": "ba103", "code": "BA103", "name": "Financial Accounting", "credits": 3, "topics": ["Accounting Equation", "Journal Entries", "Financial Statements", "Adjustments", "Cash Flow"] }
+        ],
+        "2": [
+          { "id": "ba201", "code": "BA201", "name": "Marketing", "credits": 3, "topics": ["Market Research", "Segmentation", "4Ps", "Consumer Behavior", "Digital Marketing"] },
+          { "id": "ba202", "code": "BA202", "name": "Macroeconomics", "credits": 3, "topics": ["GDP", "Inflation", "Monetary Policy", "Fiscal Policy", "International Trade"] }
+        ]
+      }
+    },
+    "fin": {
+      "1": {
+        "1": [
+          { "id": "fin101", "code": "FIN101", "name": "Intro to Finance", "credits": 3, "topics": ["Time Value of Money", "Risk & Return", "Bond Valuation", "Stock Valuation", "Financial Markets"] },
+          { "id": "ba102", "code": "BA102", "name": "Microeconomics", "credits": 3, "topics": ["Supply & Demand", "Elasticity", "Market Structures", "Consumer Theory", "Production Costs"] }
+        ]
+      }
+    }
+  }
+}
