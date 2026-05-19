@@ -1,9 +1,3 @@
-databases:
-  - name: antonine-study-db
-    plan: free
-    databaseName: antonine_study
-    user: antonine_user
-
 services:
   - type: web
     name: antonine-study-api
@@ -14,24 +8,14 @@ services:
     startCommand: node src/index.js
     envVars:
       - key: DB_HOST
-        fromDatabase:
-          name: antonine-study-db
-          property: host
+        value: "dpg-d85k9d0js32c73alq1q0-a"
       - key: DB_PORT
-        fromDatabase:
-          name: antonine-study-db
-          property: port
+        value: "5432"
       - key: DB_NAME
-        fromDatabase:
-          name: antonine-study-db
-          property: database
+        value: "antonine_study"
       - key: DB_USER
-        fromDatabase:
-          name: antonine-study-db
-          property: user
+        value: "antonine"
       - key: DB_PASSWORD
-        fromDatabase:
-          name: antonine-study-db
-          property: password
+        value: "jzvsoQJgVKU26WkmtUXI6qOyK7i4Jjfe"
       - key: SERVER_PORT
         value: "8080"
