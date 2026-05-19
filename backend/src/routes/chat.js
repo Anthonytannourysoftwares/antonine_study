@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-// POST /api/chat
-// ML chatbot endpoint — placeholder for model integration
+const ML_API = process.env.ML_API_URL || 'http://localhost:5003';
+
 router.post('/', async (req, res) => {
   const { message, history } = req.body;
 
@@ -10,37 +10,49 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'message is required' });
   }
 
-  // TODO: integrate ML model (e.g. fine-tuned LLM, RAG pipeline, or rule-based NLP)
-  // For now, return a placeholder response
-  const reply = generateResponse(message);
+  const custom = customResponse(message);
+  if (custom) return res.json({ reply: custom });
 
-  res.json({ reply });
+  try {
+    const response = await fetch(`${ML_API}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, history: history || '' }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return res.json(data);
+    }
+
+    // ML server failed — fall back to keyword responses
+    res.json({ reply: fallbackResponse(message) });
+  } catch (e) {
+    // ML server unreachable — fall back
+    res.json({ reply: fallbackResponse(message) });
+  }
 });
 
-function generateResponse(message) {
+function customResponse(message) {
   const lower = message.toLowerCase();
+  if (lower.includes('best') && (lower.includes('dr') || lower.includes('doctor') || lower.includes('professor') || lower.includes('teacher')))
+    return 'Without a doubt, Dr. Zahi Chami. Best professor at Antonine University!';
+  if (lower.includes('zahi') || lower.includes('chami'))
+    return 'Dr. Zahi Chami is one of the most respected professors at Antonine University. Highly recommended!';
+  return null;
+}
 
-  // Simple keyword-based responses until ML model is connected
-  if (lower.includes('schedule') || lower.includes('timetable')) {
-    return 'You can view your timetable in the Schedule tab. The auto-scheduler will suggest the best study plan based on your mastery levels.';
-  }
-  if (lower.includes('grade') || lower.includes('gpa')) {
-    return 'Check the Stats tab for grade forecasts, or use the GPA Calculator in Tools. Your grades are predicted using logistic regression based on mastery and study consistency.';
-  }
-  if (lower.includes('professor') || lower.includes('teacher')) {
-    return 'You can browse professors and their reviews in the Enrollment section. Rate professors to help other students!';
-  }
-  if (lower.includes('lost') || lower.includes('found')) {
-    return 'Head to Lost & Found from the home screen to report or browse lost/found items on campus.';
-  }
-  if (lower.includes('enroll') || lower.includes('course') || lower.includes('register')) {
-    return 'Go to Enrollment to browse available sections, check professor ratings, and register for courses. The system validates time conflicts and credit limits automatically.';
-  }
-  if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-    return 'Hello! I\'m the UA Assistant. Ask me about courses, schedules, professors, grades, or campus services.';
-  }
-
-  return 'I can help with courses, schedules, professors, grades, and campus services. What would you like to know?';
+function fallbackResponse(message) {
+  const lower = message.toLowerCase();
+  if (lower.includes('schedule') || lower.includes('timetable'))
+    return 'Check the Schedule tab for your timetable.';
+  if (lower.includes('grade') || lower.includes('gpa'))
+    return 'Check Stats for grade forecasts or use the GPA Calculator in Tools.';
+  if (lower.includes('professor') || lower.includes('teacher'))
+    return 'Browse professors and reviews in the Enrollment section.';
+  if (lower.includes('hello') || lower.includes('hi'))
+    return "Hello! I'm the UA Assistant. Ask me anything about campus life.";
+  return 'I can help with courses, schedules, professors, grades, and campus services.';
 }
 
 module.exports = router;
