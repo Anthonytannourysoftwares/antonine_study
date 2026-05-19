@@ -1,0 +1,37 @@
+databases:
+  - name: antonine-study-db
+    plan: free
+    databaseName: antonine_study
+    user: antonine_user
+
+services:
+  - type: web
+    name: antonine-study-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && node src/migrate.js
+    startCommand: node src/index.js
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: antonine-study-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: antonine-study-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: antonine-study-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: antonine-study-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: antonine-study-db
+          property: password
+      - key: SERVER_PORT
+        value: "8080"
