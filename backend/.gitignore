@@ -1,0 +1,5 @@
+node_modules/
+.env
+courses/
+uploads/
+ml_summarizer/
