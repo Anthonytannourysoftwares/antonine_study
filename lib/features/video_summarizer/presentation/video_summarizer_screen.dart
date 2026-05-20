@@ -19,7 +19,7 @@ class VideoSummarizerScreen extends StatefulWidget {
 }
 
 class _VideoSummarizerScreenState extends State<VideoSummarizerScreen> {
-  static const _mlBaseUrl = 'http://192.168.10.101:5003';
+  static const _mlBaseUrl = 'http://172.16.130.166:5003';
   static const _boxName = 'video_summaries';
 
   final _picker = ImagePicker();

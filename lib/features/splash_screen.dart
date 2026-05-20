@@ -61,8 +61,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // TODO(user): drop the real logo at assets/images/logo_antonine.png
-            // and assets/images/logo_antonine_mono.png for app bars
             Image.asset(
               'assets/images/ua_logo.png',
               width: 260,

@@ -266,7 +266,7 @@ class _FileCard extends StatefulWidget {
 }
 
 class _FileCardState extends State<_FileCard> {
-  static const _mlBaseUrl = 'http://192.168.10.101:5003';
+  static const _mlBaseUrl = 'http://172.16.130.166:5003';
   bool _downloading = false;
   bool _summarizing = false;
 

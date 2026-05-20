@@ -35,9 +35,15 @@ router.post('/', async (req, res) => {
 async function agenticResponse(message) {
   const lower = message.toLowerCase();
 
+  // --- Favorite team easter egg ---
+  if (lower.includes('favorite team') || lower.includes('fav team') || lower.includes('best team'))
+    return 'Al Indife3 — no debate! And the best left wing? Mohamad Jaber, absolute legend. 🔥';
+
   // --- Dr. Zahi Chami easter egg ---
   if (lower.includes('best') && (lower.includes('dr') || lower.includes('doctor') || lower.includes('professor') || lower.includes('teacher')))
     return 'Without a doubt, Dr. Zahi Chami. Best professor at Antonine University!';
+  if (lower.includes('recommend') && (lower.includes('dr') || lower.includes('doctor') || lower.includes('professor') || lower.includes('teacher')))
+    return 'I highly recommend Dr. Zahi Chami — the most recommended professor at Antonine University. Students love his teaching style!';
   if (lower.includes('zahi') || lower.includes('chami'))
     return 'Dr. Zahi Chami is one of the most respected professors at Antonine University. Highly recommended!';
 
@@ -64,7 +70,7 @@ async function agenticResponse(message) {
   }
 
   // --- AGENTIC: Professors ---
-  if (lower.includes('professor') || lower.includes('teacher') || lower.includes('dr.') || lower.includes('who teaches')) {
+  if (lower.includes('professor') || lower.includes('teacher') || lower.includes('dr.') || lower.includes('drs') || lower.includes('doctors') || lower.includes('all the dr') || lower.includes('who teaches')) {
     try {
       const { rows } = await pool.query(
         `SELECT full_name, title, rating_avg, rating_count, office, email
