@@ -10,6 +10,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/utils/app_state_provider.dart';
 import '../../../core/widgets/ant_button.dart';
+import '../../guide/presentation/walkthrough_screen.dart';
 import '../domain/id_validator.dart';
 
 class IdVerificationScreen extends ConsumerStatefulWidget {
@@ -73,11 +74,19 @@ class _IdVerificationScreenState extends ConsumerState<IdVerificationScreen> {
     }
   }
 
-  void _onSuccess() {
+  Future<void> _onSuccess() async {
     final name = _result?.studentName ?? 'Student';
     final firstName = name.split(' ').first;
-    ref.read(appStateProvider.notifier).completeIdVerification(firstName);
-    context.go(AppRoutes.profileSetup);
+    await ref.read(appStateProvider.notifier).completeIdVerification(firstName);
+    if (!mounted) return;
+    // Check if walkthrough has been seen
+    final seen = await WalkthroughScreen.hasBeenSeen();
+    if (!mounted) return;
+    if (!seen) {
+      context.go(AppRoutes.walkthrough);
+    } else {
+      context.go(AppRoutes.profileSetup);
+    }
   }
 
   void _showManualEntry() {
@@ -295,7 +304,7 @@ class _IdVerificationScreenState extends ConsumerState<IdVerificationScreen> {
               .scale(begin: const Offset(0.5, 0.5), end: const Offset(1, 1)),
           const SizedBox(height: AppSpacing.xl),
           Text(
-            'Welcome to Antonine Study',
+            'Welcome to University Antonine',
             style: theme.textTheme.headlineSmall,
           ).animate().fadeIn(delay: 200.ms, duration: 400.ms),
           if (_result?.studentName != null) ...[

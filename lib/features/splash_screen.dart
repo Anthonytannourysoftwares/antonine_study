@@ -6,6 +6,7 @@ import '../core/constants/app_constants.dart';
 import '../core/routing/app_router.dart';
 import '../core/theme/app_colors.dart';
 import '../core/utils/app_state_provider.dart';
+import 'id_gate/id_gate_controller.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -30,6 +31,17 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
     if (!mounted) return;
 
+    // If user is past setup, check the daily ID gate
+    if (destination == AppState.home) {
+      await ref.read(idGateControllerProvider.notifier).checkGate();
+      if (!mounted) return;
+      final gateState = ref.read(idGateControllerProvider);
+      if (gateState == IdGateState.expired) {
+        context.go(AppRoutes.idGate);
+        return;
+      }
+    }
+
     final route = switch (destination) {
       AppState.onboarding => AppRoutes.onboarding,
       AppState.idVerification => AppRoutes.idVerification,
@@ -44,44 +56,31 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'Antonine',
-              style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
+            // TODO(user): drop the real logo at assets/images/logo_antonine.png
+            // and assets/images/logo_antonine_mono.png for app bars
+            Image.asset(
+              'assets/images/ua_logo.png',
+              width: 260,
             )
                 .animate()
                 .fadeIn(duration: 600.ms, curve: Curves.easeOutCubic)
-                .slideY(begin: 0.1, end: 0),
-            const SizedBox(height: 4),
+                .scale(begin: const Offset(0.9, 0.9), end: const Offset(1, 1)),
+            const SizedBox(height: 24),
             Text(
               'Study',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Colors.white.withValues(alpha: 0.8),
+                    color: AppColors.primary,
                     fontWeight: FontWeight.w400,
                     letterSpacing: 4,
                   ),
             )
-                .animate(delay: 200.ms)
+                .animate(delay: 300.ms)
                 .fadeIn(duration: 600.ms, curve: Curves.easeOutCubic),
-            const SizedBox(height: 12),
-            Container(
-              width: 48,
-              height: 3,
-              decoration: BoxDecoration(
-                color: AppColors.secondary,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            )
-                .animate(delay: 400.ms)
-                .fadeIn(duration: 400.ms)
-                .scaleX(begin: 0, end: 1, curve: Curves.easeOutCubic),
           ],
         ),
       ),

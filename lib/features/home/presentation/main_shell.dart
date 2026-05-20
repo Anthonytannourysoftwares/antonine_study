@@ -10,7 +10,10 @@ class MainShell extends StatelessWidget {
 
   int _currentIndex(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
-    if (location.startsWith(AppRoutes.stats)) return 1;
+    if (location.startsWith(AppRoutes.schedule)) return 1;
+    if (location.startsWith(AppRoutes.aiHelper)) return 2;
+    if (location.startsWith(AppRoutes.stats)) return 3;
+    if (location.startsWith(AppRoutes.settings)) return 4;
     return 0;
   }
 
@@ -27,7 +30,13 @@ class MainShell extends StatelessWidget {
             case 0:
               context.go(AppRoutes.home);
             case 1:
+              context.go(AppRoutes.schedule);
+            case 2:
+              context.go(AppRoutes.aiHelper);
+            case 3:
               context.go(AppRoutes.stats);
+            case 4:
+              context.go(AppRoutes.settings);
           }
         },
         destinations: const [
@@ -37,9 +46,24 @@ class MainShell extends StatelessWidget {
             label: 'Home',
           ),
           NavigationDestination(
+            icon: Icon(PhosphorIconsRegular.calendarCheck),
+            selectedIcon: Icon(PhosphorIconsBold.calendarCheck),
+            label: 'Plan',
+          ),
+          NavigationDestination(
+            icon: Icon(PhosphorIconsRegular.brain),
+            selectedIcon: Icon(PhosphorIconsBold.brain),
+            label: 'AI Helper',
+          ),
+          NavigationDestination(
             icon: Icon(PhosphorIconsRegular.chartBar),
             selectedIcon: Icon(PhosphorIconsBold.chartBar),
             label: 'Stats',
+          ),
+          NavigationDestination(
+            icon: Icon(PhosphorIconsRegular.gear),
+            selectedIcon: Icon(PhosphorIconsBold.gear),
+            label: 'Settings',
           ),
         ],
       ),

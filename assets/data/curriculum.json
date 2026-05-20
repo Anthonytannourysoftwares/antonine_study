@@ -4,88 +4,85 @@
       "id": "fea",
       "name": "Faculty of Engineering",
       "majors": [
-        { "id": "cs", "name": "Computer Science" },
-        { "id": "ce", "name": "Computer Engineering" },
-        { "id": "te", "name": "Telecom Engineering" }
-      ]
-    },
-    {
-      "id": "fbm",
-      "name": "Faculty of Business & Management",
-      "majors": [
-        { "id": "ba", "name": "Business Administration" },
-        { "id": "fin", "name": "Finance" }
+        { "id": "ce", "name": "Computer Engineering" }
       ]
     }
   ],
   "subjects": {
-    "cs": {
+    "ce": {
       "1": {
         "1": [
-          { "id": "cs101", "code": "CS101", "name": "Intro to Programming", "credits": 3, "topics": ["Variables & Types", "Control Flow", "Functions", "Arrays", "OOP Basics"] },
-          { "id": "math101", "code": "MATH101", "name": "Calculus I", "credits": 3, "topics": ["Limits", "Derivatives", "Integrals", "Applications of Derivatives", "Series"] },
-          { "id": "phys101", "code": "PHYS101", "name": "Physics I", "credits": 3, "topics": ["Kinematics", "Newton's Laws", "Work & Energy", "Momentum", "Rotational Motion"] },
-          { "id": "eng101", "code": "ENG101", "name": "English Communication", "credits": 3, "topics": ["Academic Writing", "Presentations", "Critical Reading", "Research Methods", "Argumentation"] },
-          { "id": "math102", "code": "MATH102", "name": "Discrete Mathematics", "credits": 3, "topics": ["Logic & Proofs", "Sets & Relations", "Combinatorics", "Graph Theory", "Boolean Algebra"] }
+          { "id": "ce_alg1", "code": "ALG1", "name": "Algebra I", "credits": 3, "topics": ["Matrices", "Determinants", "Vector Spaces", "Linear Transformations", "Eigenvalues"] },
+          { "id": "ce_circuit", "code": "CIRCUIT1", "name": "Circuit Analysis", "credits": 3, "topics": ["Ohm's Law", "Kirchhoff's Laws", "Thevenin/Norton", "AC Analysis", "Frequency Response"] },
+          { "id": "ce_intro_eng", "code": "INTRO_ENG", "name": "Introduction to Engineering", "credits": 3, "topics": ["Engineering Disciplines", "Problem Solving", "Design Thinking", "Ethics", "Technical Communication"] },
+          { "id": "ce_lab_circuit", "code": "LAB_CIRCUIT", "name": "Lab Circuit Analysis", "credits": 1, "topics": ["Circuit Building", "Measurements", "Oscilloscope", "Component Testing", "Lab Reports"] },
+          { "id": "ce_lab_networks", "code": "LAB_NET", "name": "Lab. Computer and Networks", "credits": 1, "topics": ["Network Setup", "IP Addressing", "Cabling", "Protocols", "Troubleshooting"] },
+          { "id": "ce_lab_prog1", "code": "LAB_PROG1", "name": "Lab. Programming I", "credits": 1, "topics": ["Coding Exercises", "Debugging", "IDE Usage", "Version Control", "Problem Sets"] },
+          { "id": "ce_prog1", "code": "PROG1", "name": "Programming I", "credits": 3, "topics": ["Variables & Types", "Control Flow", "Functions", "Arrays", "OOP Basics"] }
         ],
         "2": [
-          { "id": "cs102", "code": "CS102", "name": "Data Structures", "credits": 3, "topics": ["Linked Lists", "Stacks & Queues", "Trees", "Graphs", "Hash Tables", "Sorting Algorithms"] },
-          { "id": "math201", "code": "MATH201", "name": "Calculus II", "credits": 3, "topics": ["Multivariable Functions", "Partial Derivatives", "Double Integrals", "Vector Calculus", "Differential Equations"] },
-          { "id": "cs103", "code": "CS103", "name": "Digital Logic", "credits": 3, "topics": ["Number Systems", "Boolean Algebra", "Combinational Circuits", "Sequential Circuits", "Memory"] }
+          { "id": "ce_alg2", "code": "ALG2", "name": "Algebra II", "credits": 3, "topics": ["Advanced Linear Algebra", "Inner Product Spaces", "Diagonalization", "Quadratic Forms", "Jordan Normal Form"] },
+          { "id": "ce_calc2", "code": "CALC2", "name": "Calculus II", "credits": 3, "topics": ["Multivariable Functions", "Partial Derivatives", "Double Integrals", "Vector Calculus", "Differential Equations"] },
+          { "id": "ce_electrostatics", "code": "ELEC", "name": "Electrostatics", "credits": 3, "topics": ["Electric Charge", "Coulomb's Law", "Electric Field", "Gauss's Law", "Electric Potential"] },
+          { "id": "ce_intro_net", "code": "INTRO_NET", "name": "Introduction to Networks", "credits": 3, "topics": ["OSI Model", "TCP/IP", "Routing", "Switching", "Network Security"] },
+          { "id": "ce_lab_cad", "code": "LAB_CAD", "name": "Lab. CAD & GIS", "credits": 1, "topics": ["CAD Software", "2D Drawing", "3D Modeling", "GIS Basics", "Spatial Analysis"] },
+          { "id": "ce_prog2", "code": "PROG2", "name": "Programming II", "credits": 3, "topics": ["OOP Advanced", "Inheritance", "Polymorphism", "Data Structures", "File I/O"] }
         ]
       },
       "2": {
         "1": [
-          { "id": "cs201", "code": "CS201", "name": "Algorithms", "credits": 3, "topics": ["Complexity Analysis", "Divide & Conquer", "Dynamic Programming", "Greedy Algorithms", "Graph Algorithms"] },
-          { "id": "cs202", "code": "CS202", "name": "Database Systems", "credits": 3, "topics": ["ER Modeling", "SQL", "Normalization", "Transactions", "Indexing"] },
-          { "id": "cs203", "code": "CS203", "name": "Computer Architecture", "credits": 3, "topics": ["ISA", "Pipelining", "Cache", "Virtual Memory", "I/O Systems"] }
+          { "id": "ce_calc3", "code": "CALC3", "name": "Calculus III", "credits": 3, "topics": ["Multivariable Calculus", "Triple Integrals", "Line Integrals", "Surface Integrals", "Stokes' Theorem"] },
+          { "id": "ce_ds", "code": "DS", "name": "Data Structures", "credits": 3, "topics": ["Linked Lists", "Stacks & Queues", "Trees", "Graphs", "Hash Tables", "Sorting Algorithms"] },
+          { "id": "ce_em", "code": "EM", "name": "Electricity and Magnetism", "credits": 3, "topics": ["Magnetic Fields", "Ampere's Law", "Faraday's Law", "Inductance", "Maxwell's Equations"] },
+          { "id": "ce_lab_em", "code": "LAB_EM", "name": "Lab. Electricity and Magnetism", "credits": 1, "topics": ["Magnetic Field Measurements", "Induction Experiments", "RLC Circuits", "Transformer Testing", "Lab Reports"] },
+          { "id": "ce_rse", "code": "RSE", "name": "Routing and Switching Essentials", "credits": 3, "topics": ["VLANs", "Inter-VLAN Routing", "Static Routing", "Dynamic Routing", "STP"] },
+          { "id": "ce_unix", "code": "UNIX", "name": "Unix", "credits": 3, "topics": ["Shell Commands", "File System", "Processes", "Shell Scripting", "Permissions"] },
+          { "id": "ce_webdesign", "code": "WEBDES", "name": "Web Design", "credits": 3, "topics": ["HTML", "CSS", "Responsive Design", "JavaScript Basics", "UI/UX Principles"] }
         ],
         "2": [
-          { "id": "cs204", "code": "CS204", "name": "Operating Systems", "credits": 3, "topics": ["Processes", "Threads", "Scheduling", "Memory Management", "File Systems"] },
-          { "id": "cs205", "code": "CS205", "name": "Software Engineering", "credits": 3, "topics": ["Requirements", "Design Patterns", "Testing", "Agile", "Version Control"] },
-          { "id": "cs206", "code": "CS206", "name": "Web Development", "credits": 3, "topics": ["HTML/CSS", "JavaScript", "REST APIs", "Databases", "Deployment"] }
+          { "id": "ce_dbdesign", "code": "DBDES", "name": "Database Design", "credits": 3, "topics": ["ER Modeling", "Normalization", "SQL", "Relational Algebra", "Database Administration"] },
+          { "id": "ce_oop1", "code": "OOP1", "name": "Object Oriented Programming I", "credits": 3, "topics": ["Classes & Objects", "Inheritance", "Polymorphism", "Encapsulation", "Design Patterns"] },
+          { "id": "ce_or", "code": "OR", "name": "Operations Research", "credits": 3, "topics": ["Linear Programming", "Simplex Method", "Transportation Problem", "Assignment Problem", "Network Models"] },
+          { "id": "ce_owc", "code": "OWC", "name": "Oral and Written Communication", "credits": 3, "topics": ["Technical Writing", "Presentations", "Report Writing", "Communication Skills", "Professional Correspondence"] },
+          { "id": "ce_probstats", "code": "PROBSTAT", "name": "Probability and Statistics", "credits": 3, "topics": ["Probability Theory", "Random Variables", "Distributions", "Hypothesis Testing", "Regression"] },
+          { "id": "ce_scn", "code": "SCN", "name": "Scaling and Connecting Network", "credits": 3, "topics": ["WAN Technologies", "Network Scaling", "OSPF", "EIGRP", "Network Troubleshooting"] }
         ]
-      }
-    },
-    "ce": {
-      "1": {
+      },
+      "3": {
         "1": [
-          { "id": "ce101", "code": "CE101", "name": "Intro to Engineering", "credits": 3, "topics": ["Engineering Disciplines", "Problem Solving", "Design Thinking", "Ethics", "Technical Communication"] },
-          { "id": "math101", "code": "MATH101", "name": "Calculus I", "credits": 3, "topics": ["Limits", "Derivatives", "Integrals", "Applications of Derivatives", "Series"] },
-          { "id": "phys101", "code": "PHYS101", "name": "Physics I", "credits": 3, "topics": ["Kinematics", "Newton's Laws", "Work & Energy", "Momentum", "Rotational Motion"] }
+          { "id": "ce_dbprog", "code": "DBPROG", "name": "Database Programming", "credits": 3, "topics": ["PL/SQL", "Stored Procedures", "Triggers", "Cursors", "Dynamic SQL"] },
+          { "id": "ce_fundelec", "code": "FUNDELEC", "name": "Fundamentals Electronics", "credits": 3, "topics": ["Semiconductor Physics", "Diodes", "BJT", "MOSFET", "Op-Amps"] },
+          { "id": "ce_oop2", "code": "OOP2", "name": "Object Oriented Programming II", "credits": 3, "topics": ["Advanced Patterns", "Generics", "Collections", "Multithreading", "GUI Programming"] },
+          { "id": "ce_webprog1", "code": "WEBPROG1", "name": "Web Programming I", "credits": 3, "topics": ["PHP Fundamentals", "Forms & Sessions", "MySQL Integration", "MVC Pattern", "REST Basics"] }
         ],
         "2": [
-          { "id": "ce102", "code": "CE102", "name": "Circuit Analysis", "credits": 3, "topics": ["Ohm's Law", "Kirchhoff's Laws", "Thevenin/Norton", "AC Analysis", "Frequency Response"] },
-          { "id": "cs101", "code": "CS101", "name": "Intro to Programming", "credits": 3, "topics": ["Variables & Types", "Control Flow", "Functions", "Arrays", "OOP Basics"] }
+          { "id": "ce_ai", "code": "AI", "name": "Artificial Intelligence", "credits": 3, "topics": ["Search Algorithms", "Knowledge Representation", "Machine Learning Basics", "Neural Networks", "NLP Intro"] },
+          { "id": "ce_comparch", "code": "COMPARCH", "name": "Computer Architecture", "credits": 3, "topics": ["ISA", "Pipelining", "Cache", "Virtual Memory", "I/O Systems"] },
+          { "id": "ce_infographics", "code": "INFOGRAPH", "name": "Infographics", "credits": 3, "topics": ["Visual Design Principles", "Typography", "Data Visualization", "Layout", "Color Theory"] },
+          { "id": "ce_lab_ai", "code": "LAB_AI", "name": "Lab. Artificial Intelligence", "credits": 1, "topics": ["Python ML", "Scikit-learn", "Data Preprocessing", "Model Evaluation", "Neural Net Implementation"] },
+          { "id": "ce_lab_numanalysis", "code": "LAB_NUMA", "name": "Lab. Numerical Analysis", "credits": 1, "topics": ["Root Finding", "Interpolation", "Numerical Integration", "ODE Solvers", "MATLAB"] },
+          { "id": "ce_netarch", "code": "NETARCH", "name": "Network Architecture", "credits": 3, "topics": ["Network Design", "Hierarchical Model", "Redundancy", "QoS", "SDN Basics"] },
+          { "id": "ce_propsys", "code": "PROPSYS", "name": "Proprietary Systems", "credits": 3, "topics": ["Windows Server", "Active Directory", "Group Policy", "DNS/DHCP", "PowerShell"] }
         ]
-      }
-    },
-    "te": {
-      "1": {
+      },
+      "4": {
         "1": [
-          { "id": "te101", "code": "TE101", "name": "Signals & Systems", "credits": 3, "topics": ["Signal Types", "LTI Systems", "Fourier Transform", "Laplace Transform", "Z-Transform"] },
-          { "id": "math101", "code": "MATH101", "name": "Calculus I", "credits": 3, "topics": ["Limits", "Derivatives", "Integrals", "Applications of Derivatives", "Series"] }
-        ]
-      }
-    },
-    "ba": {
-      "1": {
-        "1": [
-          { "id": "ba101", "code": "BA101", "name": "Principles of Management", "credits": 3, "topics": ["Planning", "Organizing", "Leading", "Controlling", "Decision Making"] },
-          { "id": "ba102", "code": "BA102", "name": "Microeconomics", "credits": 3, "topics": ["Supply & Demand", "Elasticity", "Market Structures", "Consumer Theory", "Production Costs"] },
-          { "id": "ba103", "code": "BA103", "name": "Financial Accounting", "credits": 3, "topics": ["Accounting Equation", "Journal Entries", "Financial Statements", "Adjustments", "Cash Flow"] }
+          { "id": "ce_advprog", "code": "ADVPROG", "name": "Advanced Programming", "credits": 3, "topics": ["C# Advanced", "WPF/WinForms", "LINQ", "Async Programming", "Entity Framework"] },
+          { "id": "ce_dbadmin", "code": "DBADMIN", "name": "Database Administration", "credits": 3, "topics": ["Backup & Recovery", "Performance Tuning", "Security", "Replication", "High Availability"] },
+          { "id": "ce_devoss", "code": "DEVOSS", "name": "Development of Open Source System", "credits": 3, "topics": ["Linux Administration", "Apache/Nginx", "Docker", "Git Workflows", "CI/CD"] },
+          { "id": "ce_infosec", "code": "INFOSEC", "name": "Information System Security", "credits": 3, "topics": ["Cryptography", "Network Security", "Penetration Testing", "Security Policies", "Incident Response"] },
+          { "id": "ce_mmdb", "code": "MMDB", "name": "Multimedia Database and Image Processing", "credits": 3, "topics": ["Image Formats", "Filtering", "Edge Detection", "Segmentation", "Multimedia Indexing"] },
+          { "id": "ce_webprog2", "code": "WEBPROG2", "name": "Web Programming II", "credits": 3, "topics": ["Frameworks", "API Development", "Authentication", "Real-time Apps", "Deployment"] }
         ],
         "2": [
-          { "id": "ba201", "code": "BA201", "name": "Marketing", "credits": 3, "topics": ["Market Research", "Segmentation", "4Ps", "Consumer Behavior", "Digital Marketing"] },
-          { "id": "ba202", "code": "BA202", "name": "Macroeconomics", "credits": 3, "topics": ["GDP", "Inflation", "Monetary Policy", "Fiscal Policy", "International Trade"] }
+          { "id": "ce_appos", "code": "APPOS", "name": "Applications on Operating Systems", "credits": 3, "topics": ["System Calls", "Process Management", "IPC", "File Systems", "Kernel Modules"] },
+          { "id": "ce_netopt", "code": "NETOPT", "name": "Network Design and Optimization", "credits": 3, "topics": ["Network Planning", "Traffic Engineering", "Optimization Algorithms", "Simulation", "Cost Analysis"] }
         ]
-      }
-    },
-    "fin": {
-      "1": {
+      },
+      "5": {
         "1": [
-          { "id": "fin101", "code": "FIN101", "name": "Intro to Finance", "credits": 3, "topics": ["Time Value of Money", "Risk & Return", "Bond Valuation", "Stock Valuation", "Financial Markets"] },
-          { "id": "ba102", "code": "BA102", "name": "Microeconomics", "credits": 3, "topics": ["Supply & Demand", "Elasticity", "Market Structures", "Consumer Theory", "Production Costs"] }
+          { "id": "ce_econ", "code": "ECON", "name": "Economics for Engineers", "credits": 3, "topics": ["Micro/Macro Economics", "Cost-Benefit Analysis", "Project Finance", "Engineering Economy", "Decision Analysis"] },
+          { "id": "ce_law", "code": "LAW", "name": "Law for Engineers", "credits": 3, "topics": ["Contract Law", "Intellectual Property", "Liability", "Labor Law", "Engineering Ethics"] }
         ]
       }
     }

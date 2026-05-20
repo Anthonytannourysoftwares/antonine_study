@@ -1,5 +1,5 @@
 abstract final class AppConstants {
-  static const String appName = 'Antonine Study';
+  static const String appName = 'Antonine University';
   static const String universityName = 'Antonine University';
   static const String universityNameFr = 'Universit\u00e9 Antonine';
 

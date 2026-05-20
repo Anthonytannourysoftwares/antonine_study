@@ -27,18 +27,18 @@ class OcrService {
     'antonine',
     'université',
     'universite',
+    'university antonine',
+    'université antonine',
     'ua',
     'hadat',
     'baabda',
-    'antonine university',
   ];
 
-  // TODO(user): confirm with real Antonine student ID format
-  // Placeholder pattern: 6-8 digit number, optionally prefixed with letters
-  static final _idPattern = RegExp(r'\b[A-Z]{0,3}\d{6,8}\b');
+  // Antonine student ID format: 9-digit number (e.g. 202210138)
+  static final _idPattern = RegExp(r'\b[A-Z]{0,3}\d{6,10}\b');
 
-  // Simple name detection: look for lines with 2-3 capitalized words
-  static final _namePattern = RegExp(r'^[A-Z][a-z]+(?: [A-Z][a-z]+){1,3}$');
+  // Name detection: 2-3 words, supports ALL CAPS or Title Case
+  static final _namePattern = RegExp(r'^[A-Z][A-Za-z]+(?: [A-Z][A-Za-z]+){1,3}$');
 
   Future<OcrResult> processImage(File imageFile) async {
     final inputImage = InputImage.fromFile(imageFile);

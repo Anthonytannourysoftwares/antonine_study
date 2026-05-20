@@ -5,21 +5,21 @@ import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/routing/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/utils/theme_provider.dart';
 import '../../../core/widgets/ant_card.dart';
-import '../../../core/widgets/ant_progress_ring.dart';
+import '../../id_gate/id_gate_controller.dart';
 import '../../../core/widgets/ant_section_header.dart';
 import '../../../data/local/curriculum_loader.dart';
-import '../../../data/repositories/study_repository.dart';
 
-final _studentNameProvider = FutureProvider<String>((ref) async {
+final homeStudentNameProvider = FutureProvider<String>((ref) async {
   final prefs = await SharedPreferences.getInstance();
   return prefs.getString(AppConstants.keyStudentFirstName) ?? 'Student';
 });
 
-final _subjectsProvider = FutureProvider<List<Subject>>((ref) async {
+final homeSubjectsProvider = FutureProvider<List<Subject>>((ref) async {
   final prefs = await SharedPreferences.getInstance();
   final majorId = prefs.getString(AppConstants.keyMajorId);
   final year = prefs.getInt(AppConstants.keyYear);
@@ -36,9 +36,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final nameAsync = ref.watch(_studentNameProvider);
-    final subjectsAsync = ref.watch(_subjectsProvider);
-    final studyRepo = ref.watch(studyRepositoryProvider);
+    final nameAsync = ref.watch(homeStudentNameProvider);
+    final subjectsAsync = ref.watch(homeSubjectsProvider);
     final now = DateTime.now();
     final greeting = now.hour < 12
         ? 'Good morning'
@@ -53,7 +52,7 @@ class HomeScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -84,6 +83,8 @@ class HomeScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
+                  _VerifiedChip(),
+                  const SizedBox(width: AppSpacing.xxs),
                   IconButton(
                     onPressed: () =>
                         ref.read(themeModeProvider.notifier).toggle(),
@@ -97,107 +98,50 @@ class HomeScreen extends ConsumerWidget {
               ).animate().fadeIn(duration: 400.ms),
               const SizedBox(height: AppSpacing.xl),
 
-              // Today's Focus card
-              AntCard(
-                elevation: AntCardElevation.medium,
-                color: theme.colorScheme.primaryContainer,
-                padding: AppSpacing.paddingAllLg,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          PhosphorIconsBold.target,
-                          size: 20,
-                          color: theme.colorScheme.primary,
-                        ),
-                        const SizedBox(width: AppSpacing.xs),
-                        Text(
-                          "Today's Focus",
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            color: theme.colorScheme.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    subjectsAsync.when(
-                      data: (subjects) {
-                        if (subjects.isEmpty) {
-                          return Text(
-                            'No subjects loaded for this semester. '
-                            'Check your profile settings.',
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.onPrimaryContainer,
-                            ),
-                          );
-                        }
-                        // Show top 3 weakest subjects
-                        final sorted = List.of(subjects)
-                          ..sort((a, b) {
-                            final ma = studyRepo.getMastery(a.id);
-                            final mb = studyRepo.getMastery(b.id);
-                            return ma.compareTo(mb);
-                          });
-                        final weakest = sorted.take(3);
-                        return Column(
-                          children: weakest
-                              .map(
-                                (s) => Padding(
-                                  padding: const EdgeInsets.only(
-                                    bottom: AppSpacing.xxs,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        PhosphorIconsRegular.caretRight,
-                                        size: 14,
-                                        color: theme
-                                            .colorScheme.onPrimaryContainer,
-                                      ),
-                                      const SizedBox(width: AppSpacing.xxs),
-                                      Text(
-                                        s.name,
-                                        style: theme.textTheme.bodyMedium
-                                            ?.copyWith(
-                                          color: theme
-                                              .colorScheme.onPrimaryContainer,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        );
-                      },
-                      loading: () => const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      ),
-                      error: (_, _) => Text(
-                        'Could not load subjects.',
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-                  .animate()
-                  .fadeIn(delay: 100.ms, duration: 400.ms)
-                  .slideY(begin: 0.05, end: 0),
+              // Quick Actions
+              const AntSectionHeader(title: 'Quick Actions'),
+              const SizedBox(height: AppSpacing.xs),
+              GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisSpacing: AppSpacing.sm,
+                mainAxisSpacing: AppSpacing.sm,
+                childAspectRatio: 1.8,
+                children: [
+                  _QuickActionCard(
+                    icon: PhosphorIconsBold.chatCircleDots,
+                    color: AppColors.primary,
+                    label: 'UA Chat',
+                    onTap: () => context.push(AppRoutes.chatbot),
+                  ),
+                  _QuickActionCard(
+                    icon: PhosphorIconsBold.binoculars,
+                    color: AppColors.warning,
+                    label: 'Lost & Found',
+                    onTap: () => context.push(AppRoutes.lostFound),
+                  ),
+                  _QuickActionCard(
+                    icon: PhosphorIconsBold.calendarCheck,
+                    color: AppColors.tertiary,
+                    label: 'Scheduler',
+                    onTap: () => context.go(AppRoutes.schedule),
+                  ),
+                  _QuickActionCard(
+                    icon: PhosphorIconsBold.filmSlate,
+                    color: AppColors.secondary,
+                    label: 'Video AI',
+                    onTap: () => context.push(AppRoutes.videoSummarizer),
+                  ),
+                ],
+              ).animate().fadeIn(delay: 150.ms, duration: 400.ms),
               const SizedBox(height: AppSpacing.xl),
 
               // Subjects grid
               const AntSectionHeader(title: 'Your Subjects'),
               const SizedBox(height: AppSpacing.xs),
               subjectsAsync.when(
-                data: (subjects) => _SubjectGrid(
-                  subjects: subjects,
-                  studyRepo: studyRepo,
-                ),
+                data: (subjects) => _SubjectGrid(subjects: subjects),
                 loading: () => const Center(
                   child: Padding(
                     padding: EdgeInsets.all(AppSpacing.xxl),
@@ -227,20 +171,9 @@ class HomeScreen extends ConsumerWidget {
 }
 
 class _SubjectGrid extends StatelessWidget {
-  const _SubjectGrid({required this.subjects, required this.studyRepo});
+  const _SubjectGrid({required this.subjects});
 
   final List<Subject> subjects;
-  final StudyRepository studyRepo;
-
-  String _lastStudiedLabel(String? dateStr) {
-    if (dateStr == null) return 'Not started';
-    final date = DateTime.tryParse(dateStr);
-    if (date == null) return 'Not started';
-    final diff = DateTime.now().difference(date).inDays;
-    if (diff == 0) return 'Today';
-    if (diff == 1) return 'Yesterday';
-    return '${diff}d ago';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -264,13 +197,11 @@ class _SubjectGrid extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: AppSpacing.sm,
         mainAxisSpacing: AppSpacing.sm,
-        childAspectRatio: 1.1,
+        childAspectRatio: 1.3,
       ),
       itemCount: subjects.length,
       itemBuilder: (context, index) {
         final subject = subjects[index];
-        final mastery = studyRepo.getMastery(subject.id);
-        final lastStudied = studyRepo.getLastStudied(subject.id);
 
         return AntCard(
           elevation: AntCardElevation.soft,
@@ -278,26 +209,13 @@ class _SubjectGrid extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: Text(
-                      subject.code,
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: AppColors.secondary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                      overflow: TextOverflow.ellipsis,
+              Text(
+                subject.code,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: AppColors.secondary,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ),
-                  AntProgressRing(
-                    progress: mastery,
-                    size: 40,
-                    strokeWidth: 4,
-                    showPercentage: true,
-                  ),
-                ],
+                overflow: TextOverflow.ellipsis,
               ),
               const Spacer(),
               Text(
@@ -308,7 +226,7 @@ class _SubjectGrid extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.xxs),
               Text(
-                _lastStudiedLabel(lastStudied),
+                '${subject.credits} credits \u2022 ${subject.topics.length} topics',
                 style: Theme.of(context).textTheme.labelSmall,
               ),
             ],
@@ -321,6 +239,117 @@ class _SubjectGrid extends StatelessWidget {
             )
             .slideY(begin: 0.05, end: 0);
       },
+    );
+  }
+}
+
+class _QuickActionCard extends StatelessWidget {
+  const _QuickActionCard({
+    required this.icon,
+    required this.color,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final Color color;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return AntCard(
+      elevation: AntCardElevation.soft,
+      onTap: onTap,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.12),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, size: 16, color: color),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: theme.textTheme.labelSmall?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+    );
+  }
+}
+
+class _VerifiedChip extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final gateState = ref.watch(idGateControllerProvider);
+    if (gateState != IdGateState.verified) return const SizedBox.shrink();
+
+    final gate = ref.read(idGateControllerProvider.notifier);
+    final hours = gate.hoursRemaining;
+
+    return GestureDetector(
+      onTap: () {
+        showDialog<void>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: const Text('ID Verification'),
+            content: Text('Verified for today. ${hours}h remaining.\n\nWant to re-scan now?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  gate.forceExpire();
+                },
+                child: const Text('Re-scan now'),
+              ),
+            ],
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.xs,
+          vertical: AppSpacing.xxs,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.gold.withValues(alpha: 0.12),
+          borderRadius: AppRadius.borderRadiusPill,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              PhosphorIconsBold.shieldCheck,
+              size: 14,
+              color: AppColors.gold,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              '${hours}h',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: AppColors.gold,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

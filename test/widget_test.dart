@@ -21,7 +21,7 @@ void main() {
     });
 
     test('dark surface is correct', () {
-      expect(AppColors.surfaceDark, equals(const Color(0xFF0F1419)));
+      expect(AppColors.surfaceDark, equals(const Color(0xFF0A1520)));
     });
 
     test('secondary is muted gold', () {

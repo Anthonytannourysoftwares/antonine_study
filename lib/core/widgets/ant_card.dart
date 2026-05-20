@@ -40,6 +40,14 @@ class AntCard extends StatelessWidget {
     final effectiveColor = color ?? theme.colorScheme.surfaceContainerLowest;
     final effectiveRadius = borderRadius ?? AppRadius.borderRadiusLg;
 
+    final isDark = theme.brightness == Brightness.dark;
+    final effectiveBorder = border ??
+        (isDark
+            ? Border.all(
+                color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
+              )
+            : null);
+
     final container = AnimatedContainer(
       duration: const Duration(milliseconds: 250),
       curve: Curves.easeOutCubic,
@@ -47,8 +55,8 @@ class AntCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: effectiveColor,
         borderRadius: effectiveRadius,
-        border: border,
-        boxShadow: _shadows(),
+        border: effectiveBorder,
+        boxShadow: isDark ? [] : _shadows(),
       ),
       child: child,
     );

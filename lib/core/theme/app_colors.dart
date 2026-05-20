@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
-  // Primary
+  // Primary — deep academic navy
   static const primary = Color(0xFF1E3A5F);
-  static const primaryContainer = Color(0xFFE7EEF8);
+  static const primaryContainer = Color(0xFFD1DFEE);
   static const onPrimary = Color(0xFFFFFFFF);
-  static const onPrimaryContainer = Color(0xFF0D1F33);
+  static const onPrimaryContainer = Color(0xFF0A1929);
 
-  // Secondary (gold accent)
+  // Secondary — muted gold accent
   static const secondary = Color(0xFFB8860B);
-  static const secondaryContainer = Color(0xFFFFF3D6);
+  static const secondaryContainer = Color(0xFFFFF0C8);
   static const onSecondary = Color(0xFFFFFFFF);
-  static const onSecondaryContainer = Color(0xFF3D2C00);
+  static const onSecondaryContainer = Color(0xFF3D2D04);
 
   // Tertiary (success/progress green)
   static const tertiary = Color(0xFF5B8C5A);
@@ -40,21 +40,27 @@ abstract final class AppColors {
   static const outlineVariant = Color(0xFFC8CBC4);
 
   // Dark surfaces
-  static const surfaceDark = Color(0xFF0F1419);
-  static const surfaceDimDark = Color(0xFF1A1F26);
-  static const surfaceContainerDark = Color(0xFF1E242B);
-  static const surfaceContainerHighDark = Color(0xFF282F37);
-  static const surfaceContainerHighestDark = Color(0xFF333A42);
-  static const onSurfaceDark = Color(0xFFE3E2DD);
-  static const onSurfaceVariantDark = Color(0xFFA8ABA4);
-  static const primaryDark = Color(0xFFA8C5E8);
-  static const primaryContainerDark = Color(0xFF2A4A6B);
-  static const outlineDark = Color(0xFF6C6F68);
-  static const outlineVariantDark = Color(0xFF44473F);
+  static const surfaceDark = Color(0xFF0A1520);
+  static const surfaceDimDark = Color(0xFF141F2B);
+  static const surfaceContainerDark = Color(0xFF1A2635);
+  static const surfaceContainerHighDark = Color(0xFF243040);
+  static const surfaceContainerHighestDark = Color(0xFF2E3A4A);
+  static const onSurfaceDark = Color(0xFFE1E5EA);
+  static const onSurfaceVariantDark = Color(0xFFA4ABB5);
+  static const primaryDark = Color(0xFF8EB4D9);
+  static const primaryContainerDark = Color(0xFF152D4A);
+  static const secondaryDark = Color(0xFFDAA520);
+  static const secondaryContainerDark = Color(0xFF5C4308);
+  static const outlineDark = Color(0xFF6A7280);
+  static const outlineVariantDark = Color(0xFF3A4350);
 
   // Semantic
   static const warning = Color(0xFFE8A317);
   static const warningContainer = Color(0xFFFFF4D6);
-  static const info = Color(0xFF3B82F6);
-  static const infoContainer = Color(0xFFDBEAFE);
+  static const info = Color(0xFF1E3A5F);
+  static const infoContainer = Color(0xFFD1DFEE);
+
+  // Convenience aliases
+  static const gold = secondary;
+  static const navy = primary;
 }
